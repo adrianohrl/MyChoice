@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author adriano
+ * @author Adriano Henrique Rossette Leite <adrianohrl@gmail.com>
  */
 public class Band extends Group<Musician> implements Rateable<Band>, Artist {
     

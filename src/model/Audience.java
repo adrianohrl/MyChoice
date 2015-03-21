@@ -7,7 +7,7 @@ package model;
 
 /**
  *
- * @author adriano
+ * @author Adriano Henrique Rossette Leite <adrianohrl@gmail.com>
  */
 public class Audience extends Group<Listener> {
 

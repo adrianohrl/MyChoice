@@ -11,7 +11,7 @@ import java.util.List;
 
 /**
  *
- * @author adriano
+ * @author Adriano Henrique Rossette Leite <adrianohrl@gmail.com>
  */
 public class Music implements Rateable<Music> {
     

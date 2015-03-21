@@ -8,7 +8,7 @@ package model;
 /**
  * Escreve aki uma descricão sobre essa classe.
  * 
- * @author adriano
+ * @author Adriano Henrique Rossette Leite <adrianohrl@gmail.com>
  */
 public abstract class User {
     

@@ -7,7 +7,7 @@ package model;
 
 /**
  *
- * @author adriano
+ * @author Adriano Henrique Rossette Leite <adrianohrl@gmail.com>
  */
 public class Listener extends User implements Respondent {
 
@@ -25,6 +25,18 @@ public class Listener extends User implements Respondent {
      */
     public Listener(String name, String nickname, String email) {
         super(name, nickname, email);
+    }
+
+    /**
+     * 
+     * @param rated
+     * @param rate
+     * @param comment
+     * @return 
+     */
+    @Override
+    public Rating rate(Rateable rated, int rate, String comment) {
+        return new Rating(rate, comment, this, rated);
     }
     
 }

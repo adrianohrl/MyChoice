@@ -10,7 +10,7 @@ import java.util.List;
 
 /**
  *
- * @author adriano
+ * @author Adriano Henrique Rossette Leite <adrianohrl@gmail.com>
  * @param <T>
  */
 public abstract class Group<T extends User> {

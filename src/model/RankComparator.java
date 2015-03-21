@@ -5,19 +5,24 @@
  */
 package model;
 
+import java.util.Comparator;
+
 /**
  *
  * @author Adriano Henrique Rossette Leite <adrianohrl@gmail.com>
+ * @param <E>
  */
-public interface Respondent {
-    
+public class RankComparator<E extends Rateable> implements Comparator<Element<E>> {
+
     /**
      * 
-     * @param rated
-     * @param rate
-     * @param comment
+     * @param element1
+     * @param element2
      * @return 
      */
-    public abstract Rating rate(Rateable rated, int rate, String comment);
+    @Override
+    public int compare(Element<E> element1, Element<E> element2) {
+        return element1.compareTo(element2);
+    }
     
 }

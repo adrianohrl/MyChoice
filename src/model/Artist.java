@@ -9,6 +9,18 @@ package model;
  *
  * @author adriano
  */
-public interface Performer {
+public interface Artist {
+    
+    /**
+     * 
+     * @return 
+     */
+    public abstract boolean isPerforming();
+    
+    /**
+     * 
+     * @param performing 
+     */
+    public abstract void setPerforming(boolean performing);
     
 }

@@ -9,6 +9,12 @@ package model;
  *
  * @author adriano
  */
-public class Audience {
+public class Audience extends Group<Listener> {
+
+    /**
+     * 
+     */
+    public Audience() {
+    }
     
 }

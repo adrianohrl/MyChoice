@@ -10,6 +10,7 @@ import java.util.List;
 /**
  *
  * @author adriano
+ * @param <T>
  */
 public interface Rateable<T> extends Comparable<T> {
     

@@ -53,18 +53,34 @@ public abstract class User {
         this.name = name;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public String getNickname() {
         return nickname;
     }
 
+    /**
+     * 
+     * @param nickname 
+     */
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
 
+    /**
+     * 
+     * @return 
+     */
     public String getEmail() {
         return email;
     }
 
+    /**
+     * 
+     * @param email 
+     */
     public void setEmail(String email) {
         this.email = email;
     }

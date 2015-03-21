@@ -12,10 +12,10 @@ import java.util.List;
  *
  * @author adriano
  */
-public class Musician extends User implements Rateable<Musician>, Artist {
+public class Band extends Group<Musician> implements Rateable<Band>, Artist {
     
     /** */
-    private int ability = 0;
+    private String name;
     /** */
     private boolean performing = false;
     /** */
@@ -23,50 +23,46 @@ public class Musician extends User implements Rateable<Musician>, Artist {
     /** */
     private List<Respondent> respondents = new ArrayList<>();
     /** */
-    private List<Equipment> equipments = new ArrayList<>();
-    /** */
     private List<Repertory> repertories = new ArrayList<>();
 
     /**
      * 
      */
-    public Musician() {
+    public Band() {
     }
 
     /**
      * 
-     * @param name
-     * @param nickname
-     * @param email 
+     * @param name 
      */
-    public Musician(String name, String nickname, String email) {
-        super(name, nickname, email);
+    public Band(String name) {
+        this.name = name;
     }
 
     /**
      * 
-     * @param musician
+     * @param band
      * @return 
      */
     @Override
-    public int compareTo(Musician musician) {
-        return rate - musician.rate;
+    public int compareTo(Band band) {
+        return rate - band.rate;
     }
 
     /**
      * 
      * @return 
      */
-    public int getAbility() {
-        return ability;
+    public String getName() {
+        return name;
     }
 
     /**
      * 
-     * @param ability 
+     * @param name 
      */
-    public void setAbility(int ability) {
-        this.ability = ability;
+    public void setName(String name) {
+        this.name = name;
     }
 
     /**
@@ -84,6 +80,9 @@ public class Musician extends User implements Rateable<Musician>, Artist {
      */
     @Override
     public void setPerforming(boolean performing) {
+        for (Musician member : super.getMembers()) {
+            member.setPerforming(performing);;
+        }
         this.performing = performing;
     }
 
@@ -121,22 +120,6 @@ public class Musician extends User implements Rateable<Musician>, Artist {
     @Override
     public void setRespondents(List<Respondent> respondents) {
         this.respondents = respondents;
-    }
-
-    /**
-     * 
-     * @return 
-     */
-    public List<Equipment> getEquipments() {
-        return equipments;
-    }
-
-    /**
-     * 
-     * @param equipments 
-     */
-    public void setEquipments(List<Equipment> equipments) {
-        this.equipments = equipments;
     }
 
     /**

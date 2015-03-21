@@ -11,9 +11,18 @@ package model;
  */
 public class Listener extends User implements Respondent {
 
+    /**
+     * 
+     */
     public Listener() {
     }
 
+    /**
+     * 
+     * @param name
+     * @param nickname
+     * @param email 
+     */
     public Listener(String name, String nickname, String email) {
         super(name, nickname, email);
     }

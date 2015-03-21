@@ -28,7 +28,7 @@ public class Music implements Rateable<Music> {
     /** */
     private int rate = 0;
     /** */
-    private List<Respondent> respondents = new ArrayList<>();
+    private List<Rating> ratings = new ArrayList<>();
 
     /**
      * 
@@ -198,17 +198,17 @@ public class Music implements Rateable<Music> {
      * @return 
      */
     @Override
-    public List<Respondent> getRespondents() {
-        return respondents;
+    public List<Rating> getRatings() {
+        return ratings;
     }
 
     /**
      * 
-     * @param respondents 
+     * @param ratings 
      */
     @Override
-    public void setRespondents(List<Respondent> respondents) {
-        this.respondents = respondents;
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
     }
         
 }

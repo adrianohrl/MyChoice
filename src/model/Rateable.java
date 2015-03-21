@@ -30,12 +30,12 @@ public interface Rateable<T> extends Comparable<T> {
      * 
      * @return 
      */
-    public abstract List<Respondent> getRespondents();
+    public abstract List<Rating> getRatings();
     
     /**
      * 
-     * @param respondents 
+     * @param ratings 
      */
-    public abstract void setRespondents(List<Respondent> respondents);
+    public abstract void setRatings(List<Rating> ratings);
     
 }

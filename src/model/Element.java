@@ -22,7 +22,7 @@ public class Element <E extends Rateable> implements Rateable<Element> {
     /** */
     private int rate;
     /** */
-    private List<Respondent> respondents = new ArrayList<>();
+    private List<Rating> ratings = new ArrayList<>();
 
     /**
      * 
@@ -35,13 +35,13 @@ public class Element <E extends Rateable> implements Rateable<Element> {
      * @param element
      * @param position
      * @param rate 
-     * @param respondents 
+     * @param ratings 
      */
-    public Element(E element, int position, int rate, List<Respondent> respondents) {
+    public Element(E element, int position, int rate, List<Rating> ratings) {
         this.element = element;
         this.position = position;
         this.rate = rate;
-        this.respondents = respondents;
+        this.ratings = ratings;
     }
 
     /**
@@ -104,18 +104,22 @@ public class Element <E extends Rateable> implements Rateable<Element> {
         this.rate = rate;
     }
 
+    /**
+     * 
+     * @return 
+     */
     @Override
-    public List<Respondent> getRespondents() {
-        return respondents;
+    public List<Rating> getRatings() {
+        return ratings;
     }
 
     /**
-     *
-     * @param respondents
+     * 
+     * @param ratings 
      */
     @Override
-    public void setRespondents(List<Respondent> respondents) {
-        this.respondents = respondents;
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
     }
     
 }

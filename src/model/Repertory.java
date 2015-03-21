@@ -15,11 +15,11 @@ import java.util.List;
 public class Repertory implements Rateable<Repertory> {
     
     /** */
+    private List<Music> musics = new ArrayList<>();
+    /** */
     private int rate = 0;
     /** */
-    private List<Respondent> respondents = new ArrayList<>();
-    /** */
-    private List<Music> musics = new ArrayList<>();
+    private List<Rating> ratings = new ArrayList<>();
 
     /**
      * 
@@ -35,6 +35,22 @@ public class Repertory implements Rateable<Repertory> {
     @Override
     public int compareTo(Repertory repository) {
         return rate - repository.rate;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    public List<Music> getMusics() {
+        return musics;
+    }
+
+    /**
+     * 
+     * @param musics 
+     */
+    public void setMusics(List<Music> musics) {
+        this.musics = musics;
     }
 
     /**
@@ -60,33 +76,17 @@ public class Repertory implements Rateable<Repertory> {
      * @return 
      */
     @Override
-    public List<Respondent> getRespondents() {
-        return respondents;
+    public List<Rating> getRatings() {
+        return ratings;
     }
 
     /**
      * 
-     * @param respondents 
+     * @param ratings 
      */
     @Override
-    public void setRespondents(List<Respondent> respondents) {
-        this.respondents = respondents;
-    }
-
-    /**
-     * 
-     * @return 
-     */
-    public List<Music> getMusics() {
-        return musics;
-    }
-
-    /**
-     * 
-     * @param musics 
-     */
-    public void setMusics(List<Music> musics) {
-        this.musics = musics;
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
     }
     
 }

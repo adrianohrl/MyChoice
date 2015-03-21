@@ -30,15 +30,15 @@ public class Rank<E extends Rateable> {
      * 
      * @param elements
      * @param rates
-     * @param respondents 
+     * @param ratings 
      */
-    public Rank(List<E> elements, List<Integer> rates, List<List<Respondent>> respondents) {
+    public Rank(List<E> elements, List<Integer> rates, List<List<Rating>> ratings) {
         int numberOfElements = elements.size();
-        if (rates.size() != numberOfElements && respondents.size() != numberOfElements) {
+        if (rates.size() != numberOfElements && ratings.size() != numberOfElements) {
             return;
         }
         for (int i = 0; i < numberOfElements; i++) {
-            Element<E> element = new Element<>(elements.get(i), i, rates.get(i), respondents.get(i));
+            Element<E> element = new Element<>(elements.get(i), i, rates.get(i), ratings.get(i));
             this.elements.add(element);
         }
         sort();

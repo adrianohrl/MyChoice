@@ -19,13 +19,13 @@ public class Musician extends User implements Rateable<Musician>, Artist {
     /** */
     private boolean performing = false;
     /** */
-    private int rate = 0;
-    /** */
-    private List<Respondent> respondents = new ArrayList<>();
-    /** */
     private List<Equipment> equipments = new ArrayList<>();
     /** */
     private List<Repertory> repertories = new ArrayList<>();
+    /** */
+    private int rate = 0;
+    /** */
+    private List<Rating> ratings = new ArrayList<>();
 
     /**
      * 
@@ -91,42 +91,6 @@ public class Musician extends User implements Rateable<Musician>, Artist {
      * 
      * @return 
      */
-    @Override
-    public int getRate() {
-        return rate;
-    }
-
-    /**
-     * 
-     * @param rate 
-     */
-    @Override
-    public void setRate(int rate) {
-        this.rate = rate;
-    }
-
-    /**
-     * 
-     * @return 
-     */
-    @Override
-    public List<Respondent> getRespondents() {
-        return respondents;
-    }
-
-    /**
-     * 
-     * @param respondents 
-     */
-    @Override
-    public void setRespondents(List<Respondent> respondents) {
-        this.respondents = respondents;
-    }
-
-    /**
-     * 
-     * @return 
-     */
     public List<Equipment> getEquipments() {
         return equipments;
     }
@@ -153,6 +117,42 @@ public class Musician extends User implements Rateable<Musician>, Artist {
      */
     public void setRepertories(List<Repertory> repertories) {
         this.repertories = repertories;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    @Override
+    public int getRate() {
+        return rate;
+    }
+
+    /**
+     * 
+     * @param rate 
+     */
+    @Override
+    public void setRate(int rate) {
+        this.rate = rate;
+    }
+
+    /**
+     * 
+     * @return 
+     */
+    @Override
+    public List<Rating> getRatings() {
+        return ratings;
+    }
+
+    /**
+     * 
+     * @param ratings 
+     */
+    @Override
+    public void setRatings(List<Rating> ratings) {
+        this.ratings = ratings;
     }
     
 }

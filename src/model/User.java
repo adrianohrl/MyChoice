@@ -38,6 +38,26 @@ public abstract class User {
     }
 
     /**
+     * 
+     * @param obj
+     * @return 
+     */
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof User && equals((User) obj);
+    }
+    
+    /**
+     * 
+     * @param user
+     * @return 
+     */
+    public boolean equals(User user) {
+       return user != null && name.equalsIgnoreCase(user.name) && 
+               nickname.equalsIgnoreCase(user.nickname) && email.equalsIgnoreCase(user.email);
+    }
+
+    /**
      * descricao desse metodo
      * @return descricao do objeto de retorno
      */

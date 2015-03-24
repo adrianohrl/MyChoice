@@ -13,16 +13,15 @@ import java.util.List;
  * @author Adriano Henrique Rossette Leite <adrianohrl@gmail.com>
  * @param <E>
  */
-public class Element <E extends Rateable> implements Rateable<Element> {
+public class Element <E extends Rateable> implements Comparable<Element> {
     
-    /** */
     private E element;
     /** */
     private int position;
     /** */
-    private int rate;
+    private int rate = 0;
     /** */
-    private List<Rating> ratings = new ArrayList<>();
+    private List<Rating<E>> ratings = new ArrayList<>();
 
     /**
      * 
@@ -37,11 +36,11 @@ public class Element <E extends Rateable> implements Rateable<Element> {
      * @param rate 
      * @param ratings 
      */
-    public Element(E element, int position, int rate, List<Rating> ratings) {
+    public Element(E element, int position, int rate, List<Rating<E>> ratings) {
         this.element = element;
         this.position = position;
         this.rate = rate;
-        this.ratings = ratings;
+        this.ratings = ratings; // according to the element
     }
 
     /**
@@ -52,6 +51,25 @@ public class Element <E extends Rateable> implements Rateable<Element> {
     @Override
     public int compareTo(Element element) {
         return rate - element.getRate();
+    }
+
+    /**
+     * 
+     * @param obj
+     * @return 
+     */
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Element && this.equals((Element) element);
+    }
+    
+    /**
+     * 
+     * @param element
+     * @return 
+     */
+    public boolean equals(Element element) {
+        return this.element.equals(element);
     }
 
     /**
@@ -90,7 +108,6 @@ public class Element <E extends Rateable> implements Rateable<Element> {
      * 
      * @return 
      */
-    @Override
     public int getRate() {
         return rate;
     }
@@ -99,7 +116,6 @@ public class Element <E extends Rateable> implements Rateable<Element> {
      * 
      * @param rate 
      */
-    @Override
     public void setRate(int rate) {
         this.rate = rate;
     }
@@ -108,8 +124,7 @@ public class Element <E extends Rateable> implements Rateable<Element> {
      * 
      * @return 
      */
-    @Override
-    public List<Rating> getRatings() {
+    public List<Rating<E>> getRatings() {
         return ratings;
     }
 
@@ -117,8 +132,7 @@ public class Element <E extends Rateable> implements Rateable<Element> {
      * 
      * @param ratings 
      */
-    @Override
-    public void setRatings(List<Rating> ratings) {
+    public void setRatings(List<Rating<E>> ratings) {
         this.ratings = ratings;
     }
     

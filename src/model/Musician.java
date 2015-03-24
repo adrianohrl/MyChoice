@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author Adriano Henrique Rossette Leite <adrianohrl@gmail.com>
  */
-public class Musician extends User implements Rateable<Musician>, Artist {
+public class Musician extends Listener implements Rateable<Musician>, Artist {
     
     /** */
     private int ability = 0;
@@ -45,12 +45,44 @@ public class Musician extends User implements Rateable<Musician>, Artist {
 
     /**
      * 
+     */
+    @Override
+    public void recalculateRate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * 
      * @param musician
      * @return 
      */
     @Override
     public int compareTo(Musician musician) {
         return rate - musician.rate;
+    }
+
+    @Override
+    public boolean equals(Rateable rateable) {
+        return rateable instanceof Musician && equals((Musician) rateable);
+    }
+    
+    /**
+     * 
+     * @param listener
+     * @return 
+     */
+    @Override
+    public boolean equals(Listener listener) {
+        return listener instanceof Musician && equals((Musician) listener);
+    }
+    
+    /**
+     * 
+     * @param musician
+     * @return 
+     */
+    public boolean equals(Musician musician) {
+        return super.equals(musician) && ability == musician.ability;
     }
 
     /**

@@ -26,6 +26,22 @@ public class Repertory implements Rateable<Repertory> {
      */
     public Repertory() {
     }
+    
+    /**
+     * 
+     * @param musics 
+     */
+    public Repertory(List<Music> musics) {
+        this.musics = musics;
+    }
+
+    /**
+     * 
+     */
+    @Override
+    public void recalculateRate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     /**
      * 
@@ -35,6 +51,47 @@ public class Repertory implements Rateable<Repertory> {
     @Override
     public int compareTo(Repertory repository) {
         return rate - repository.rate;
+    }
+
+    /**
+     * 
+     * @param obj
+     * @return 
+     */
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Rateable && equals((Rateable) obj);
+    }
+
+    /**
+     * 
+     * @param rateable
+     * @return 
+     */
+    @Override
+    public boolean equals(Rateable rateable) {
+        return rateable instanceof Repertory && equals((Repertory) rateable);
+    }
+    
+    /**
+     * 
+     * @param repertory
+     * @return 
+     */
+    public boolean equals(Repertory repertory) {
+        if (repertory == null) {
+            return false;
+        }
+        if (musics.size() != repertory.musics.size()) {
+            return false;
+        }
+        for (int i = 0; i < musics.size(); i++) {
+            Music music = musics.get(i);
+            if (!music.equals(repertory.musics.get(i))) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**

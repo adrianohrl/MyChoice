@@ -26,6 +26,25 @@ public class Listener extends User implements Respondent {
     public Listener(String name, String nickname, String email) {
         super(name, nickname, email);
     }
+    
+    /**
+     * 
+     * @param user
+     * @return 
+     */
+    @Override
+    public boolean equals(User user) {
+        return user instanceof Listener && equals((Listener) user);
+    }
+    
+    /**
+     * 
+     * @param listener
+     * @return 
+     */
+    public boolean equals(Listener listener) {
+        return super.equals(listener);
+    }
 
     /**
      * 

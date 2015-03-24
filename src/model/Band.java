@@ -41,12 +41,49 @@ public class Band extends Group<Musician> implements Rateable<Band>, Artist {
 
     /**
      * 
+     */
+    @Override
+    public void recalculateRate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * 
      * @param band
      * @return 
      */
     @Override
     public int compareTo(Band band) {
         return rate - band.rate;
+    }
+    
+    /**
+     * 
+     * @param obj
+     * @return 
+     */
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Rateable && this.equals((Rateable) obj);
+    }
+
+    /**
+     * 
+     * @param rateable
+     * @return 
+     */
+    @Override
+    public boolean equals(Rateable rateable) {
+        return rateable instanceof Band && equals((Band) rateable);
+    }
+    
+    /**
+     * 
+     * @param band
+     * @return 
+     */
+    public boolean equals(Band band) {
+        return band != null && name.equalsIgnoreCase(band.name);
     }
 
     /**

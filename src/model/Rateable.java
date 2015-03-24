@@ -16,6 +16,21 @@ public interface Rateable<T> extends Comparable<T> {
     
     /**
      * 
+     * @param obj
+     * @return 
+     */
+    @Override
+    public abstract boolean equals(Object obj);
+    
+    /**
+     * 
+     * @param rateable
+     * @return 
+     */
+    public abstract boolean equals(Rateable rateable);
+    
+    /**
+     * 
      * @return 
      */
     public abstract int getRate();
@@ -25,6 +40,11 @@ public interface Rateable<T> extends Comparable<T> {
      * @param rate 
      */
     public abstract void setRate(int rate);
+    
+    /**
+     * 
+     */
+    public abstract void recalculateRate();
     
     /**
      * 

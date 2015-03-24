@@ -5,9 +5,9 @@
  */
 package model;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.TreeSet;
 
 /**
  *
@@ -17,8 +17,8 @@ import java.util.List;
 public class Rank<E extends Rateable> {
     
     /** */
-    /*talvez usar um TreeSet*/
-    private List<Element<E>> elements = new ArrayList<>();
+    private final RankComparator<E> comparator = new RankComparator<>();
+    private TreeSet<Element<E>> elements = new TreeSet(comparator);
 
     /**
      * 
@@ -28,19 +28,10 @@ public class Rank<E extends Rateable> {
 
     /**
      * 
-     * @param elements
-     * @param rates
      * @param ratings 
      */
-    public Rank(List<E> elements, List<Integer> rates, List<List<Rating>> ratings) {
-        int numberOfElements = elements.size();
-        if (rates.size() != numberOfElements && ratings.size() != numberOfElements) {
-            return;
-        }
-        for (int i = 0; i < numberOfElements; i++) {
-            Element<E> element = new Element<>(elements.get(i), i, rates.get(i), ratings.get(i));
-            this.elements.add(element);
-        }
+    public Rank(List<Rating<E>> ratings) {
+        //create elements given all ratings
         sort();
     }
     
@@ -52,7 +43,16 @@ public class Rank<E extends Rateable> {
     
     /**
      * 
-     * @param element 
+     * @param rating
+     */
+    public void add(Rating<E> rating) {
+        //elements.add(rating);
+        sort();
+    }
+    
+    /**
+     * 
+     * @param element
      */
     public void add(Element<E> element) {
         elements.add(element);
@@ -61,20 +61,10 @@ public class Rank<E extends Rateable> {
     
     /**
      * 
-     * @param index
      * @return 
      */
-    public Element<E> get(int index) {
-        return elements.get(index);
-    }
-    
-    /**
-     * 
-     * @param index
-     * @return 
-     */
-    public Element<E> remove(int index) {
-        return elements.remove(index);
+    public Element<E> getHighest() {
+        return elements.last();
     }
     
     /**
@@ -98,14 +88,14 @@ public class Rank<E extends Rateable> {
      * @return 
      */
     public Iterator iterator() {
-        return elements.iterator();
+        return elements.descendingIterator();
     }
 
     /**
      * 
      * @return 
      */
-    public List<Element<E>> getElements() {
+    public TreeSet<Element<E>> getElements() {
         return elements;
     }
 
@@ -113,7 +103,7 @@ public class Rank<E extends Rateable> {
      * 
      * @param elements 
      */
-    public void setElements(List<Element<E>> elements) {
+    public void setElements(TreeSet<Element<E>> elements) {
         this.elements = elements;
     }
     

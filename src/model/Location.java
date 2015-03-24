@@ -80,12 +80,52 @@ public class Location implements Rateable<Location> {
 
     /**
      * 
+     */
+    @Override
+    public void recalculateRate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * 
      * @param location
      * @return 
      */
     @Override
     public int compareTo(Location location) {
         return rate - location.rate;
+    }
+
+    /**
+     * 
+     * @param obj
+     * @return 
+     */
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Rateable && equals((Rateable) obj);
+    }
+
+    /**
+     * 
+     * @param rateable
+     * @return 
+     */
+    @Override
+    public boolean equals(Rateable rateable) {
+        return rateable instanceof Location && equals((Location) rateable);
+    }
+    
+    /**
+     * 
+     * @param location
+     * @return 
+     */
+    public boolean equals(Location location) {
+        return location != null && name.equalsIgnoreCase(location.name) && street.equalsIgnoreCase(location.street) &&
+                identifier.equalsIgnoreCase(location.identifier) && district.equalsIgnoreCase(location.district) &&
+                zip.equalsIgnoreCase(location.zip) && city.equalsIgnoreCase(location.city) && county.equalsIgnoreCase(location.county) &&
+                state.equalsIgnoreCase(location.state) && country.equalsIgnoreCase(location.country);
     }
 
     /**

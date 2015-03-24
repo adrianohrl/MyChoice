@@ -67,12 +67,49 @@ public class Event implements Rateable<Event> {
 
     /**
      * 
+     */
+    @Override
+    public void recalculateRate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * 
      * @param event
      * @return 
      */
     @Override
     public int compareTo(Event event) {
         return rate - event.rate;
+    }
+    
+    /**
+     * 
+     * @param obj
+     * @return 
+     */
+    @Override
+    public boolean equals(Object obj) {
+       return obj instanceof Rateable && equals((Rateable) obj); 
+    }
+
+    /**
+     * 
+     * @param rateable
+     * @return 
+     */
+    @Override
+    public boolean equals(Rateable rateable) {
+        return rateable instanceof Event && equals((Event) rateable);
+    }
+    
+    /**
+     * 
+     * @param event
+     * @return 
+     */
+    public boolean equals(Event event) {
+        return event != null && date.equals(event.date) && location.equals(event.location);
     }
 
     /**

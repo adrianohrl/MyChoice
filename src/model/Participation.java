@@ -61,12 +61,50 @@ public class Participation implements Rateable<Participation> {
 
     /**
      * 
+     */
+    @Override
+    public void recalculateRate() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * 
      * @param participation
      * @return 
      */
     @Override
     public int compareTo(Participation participation) {
         return rate - participation.rate;
+    }
+
+    /**
+     * 
+     * @param obj
+     * @return 
+     */
+    @Override
+    public boolean equals(Object obj) {
+        return obj instanceof Rateable && equals((Rateable) obj);
+    }
+
+    /**
+     * 
+     * @param rateable
+     * @return 
+     */
+    @Override
+    public boolean equals(Rateable rateable) {
+        return rateable instanceof Participation && equals((Participation) rateable);
+    }
+    
+    /**
+     * 
+     * @param participation
+     * @return 
+     */
+    public boolean equals(Participation participation) {
+        return participation != null && artist.equals(participation.artist) && 
+                initialDate.equals(participation.initialDate) && event.equals(participation.event);
     }
 
     /**

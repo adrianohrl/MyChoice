@@ -11,8 +11,9 @@ import java.util.GregorianCalendar;
 /**
  *
  * @author Adriano Henrique Rossette Leite <adrianohrl@gmail.com>
+ * @param <T>
  */
-public class Rating {
+public class Rating<T extends Rateable> {
     
     /** */
     private int rate = 0;
@@ -21,7 +22,7 @@ public class Rating {
     /** */
     private Respondent respondent;
     /** */
-    private Rateable rated;
+    private T rated;
     /** */
     private Calendar date = new GregorianCalendar();
     
@@ -37,7 +38,7 @@ public class Rating {
      * @param respondent
      * @param rated 
      */
-    public Rating(int rate, Respondent respondent, Rateable rated) {
+    public Rating(int rate, Respondent respondent, T rated) {
         this.rate = rate;
         this.respondent = respondent;
         this.rated = rated;
@@ -50,7 +51,7 @@ public class Rating {
      * @param respondent
      * @param rated 
      */
-    public Rating(int rate, String comment, Respondent respondent, Rateable rated) {
+    public Rating(int rate, String comment, Respondent respondent, T rated) {
         this(rate, respondent, rated);
         this.comment = comment;
     }
@@ -107,7 +108,7 @@ public class Rating {
      * 
      * @return 
      */
-    public Rateable getRated() {
+    public T getRated() {
         return rated;
     }
 
@@ -115,7 +116,7 @@ public class Rating {
      * 
      * @param rated 
      */
-    public void setRated(Rateable rated) {
+    public void setRated(T rated) {
         this.rated = rated;
     }
 

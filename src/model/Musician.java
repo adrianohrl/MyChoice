@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author Adriano Henrique Rossette Leite <adrianohrl@gmail.com>
  */
-public class Musician extends Listener implements Rateable<Musician>, Artist {
+public class Musician extends Listener implements Rateable<Musician>, Artist<Musician> {
     
     /** */
     private int ability = 0;
@@ -23,9 +23,7 @@ public class Musician extends Listener implements Rateable<Musician>, Artist {
     /** */
     private List<Repertory> repertories = new ArrayList<>();
     /** */
-    private int rate = 0;
-    /** */
-    private List<Rating> ratings = new ArrayList<>();
+    private OneElementRank<Musician> globalRank = new OneElementRank<>(this);
 
     /**
      * 
@@ -42,15 +40,7 @@ public class Musician extends Listener implements Rateable<Musician>, Artist {
     public Musician(String name, String nickname, String email) {
         super(name, nickname, email);
     }
-
-    /**
-     * 
-     */
-    @Override
-    public void recalculateRate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
+    
     /**
      * 
      * @param musician
@@ -58,9 +48,14 @@ public class Musician extends Listener implements Rateable<Musician>, Artist {
      */
     @Override
     public int compareTo(Musician musician) {
-        return rate - musician.rate;
+        return super.compareTo(musician);
     }
 
+    /**
+     * 
+     * @param rateable
+     * @return 
+     */
     @Override
     public boolean equals(Rateable rateable) {
         return rateable instanceof Musician && equals((Musician) rateable);
@@ -156,35 +151,19 @@ public class Musician extends Listener implements Rateable<Musician>, Artist {
      * @return 
      */
     @Override
-    public int getRate() {
-        return rate;
+    public OneElementRank<Musician> getGlobalRank() {
+        return globalRank;
     }
 
     /**
      * 
-     * @param rate 
+     * @param globalRank 
      */
     @Override
-    public void setRate(int rate) {
-        this.rate = rate;
-    }
-
-    /**
-     * 
-     * @return 
-     */
-    @Override
-    public List<Rating> getRatings() {
-        return ratings;
-    }
-
-    /**
-     * 
-     * @param ratings 
-     */
-    @Override
-    public void setRatings(List<Rating> ratings) {
-        this.ratings = ratings;
+    public void setGlobalRank(OneElementRank globalRank) {
+        if (globalRank.getRated() instanceof Musician) {
+            this.globalRank = globalRank;
+        }
     }
     
 }

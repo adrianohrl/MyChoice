@@ -3,27 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package model;
+package test;
 
 /**
  *
  * @author Adriano Henrique Rossette Leite <adrianohrl@gmail.com>
  */
-public class Audience extends Group<Listener> {
-
-    /**
-     * 
-     */
-    public Audience() {
-    }
-
-    /**
-     * 
-     * @return 
-     */
-    @Override
-    public String toString() {
-        return super.toString();
+public class RankTest {
+    
+    public static void main(String[] args) {
+        
     }
     
 }

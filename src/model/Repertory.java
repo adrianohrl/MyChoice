@@ -6,6 +6,8 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -15,11 +17,11 @@ import java.util.List;
 public class Repertory implements Rateable<Repertory> {
     
     /** */
+    private Calendar createdOn = new GregorianCalendar();
+    /** */
     private List<Music> musics = new ArrayList<>();
     /** */
-    private int rate = 0;
-    /** */
-    private List<Rating> ratings = new ArrayList<>();
+    private OneElementRank<Repertory> globalRank = new OneElementRank<>(this);
 
     /**
      * 
@@ -37,20 +39,12 @@ public class Repertory implements Rateable<Repertory> {
 
     /**
      * 
-     */
-    @Override
-    public void recalculateRate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    /**
-     * 
      * @param repository
      * @return 
      */
     @Override
     public int compareTo(Repertory repository) {
-        return rate - repository.rate;
+        return createdOn.compareTo(repository.createdOn);
     }
 
     /**
@@ -98,6 +92,22 @@ public class Repertory implements Rateable<Repertory> {
      * 
      * @return 
      */
+    public Calendar getCreatedOn() {
+        return createdOn;
+    }
+
+    /**
+     * 
+     * @param createdOn 
+     */
+    public void setCreatedOn(Calendar createdOn) {
+        this.createdOn = createdOn;
+    }
+
+    /**
+     * 
+     * @return 
+     */
     public List<Music> getMusics() {
         return musics;
     }
@@ -115,35 +125,19 @@ public class Repertory implements Rateable<Repertory> {
      * @return 
      */
     @Override
-    public int getRate() {
-        return rate;
+    public OneElementRank<Repertory> getGlobalRank() {
+        return globalRank;
     }
 
     /**
      * 
-     * @param rate 
+     * @param globalRank 
      */
     @Override
-    public void setRate(int rate) {
-        this.rate = rate;
-    }
-
-    /**
-     * 
-     * @return 
-     */
-    @Override
-    public List<Rating> getRatings() {
-        return ratings;
-    }
-
-    /**
-     * 
-     * @param ratings 
-     */
-    @Override
-    public void setRatings(List<Rating> ratings) {
-        this.ratings = ratings;
+    public void setGlobalRank(OneElementRank globalRank) {
+        if (globalRank.getRated() instanceof Repertory) {
+            this.globalRank = globalRank;
+        }
     }
     
 }

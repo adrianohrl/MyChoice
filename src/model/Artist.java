@@ -8,8 +8,9 @@ package model;
 /**
  *
  * @author Adriano Henrique Rossette Leite <adrianohrl@gmail.com>
+ * @param <T>
  */
-public interface Artist {
+public interface Artist<T extends Rateable> extends Rateable<T> {
     
     /**
      * 

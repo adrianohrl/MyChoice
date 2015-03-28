@@ -6,8 +6,6 @@
 package model;
 
 import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -15,27 +13,18 @@ import java.util.List;
  */
 public class Music implements Rateable<Music> {
 
-    /**
-     *      */
+    /** */
     private String title;
-    /**
-     *      */
+    /** */
     private String album = "";
-    /**
-     *      */
+    /** */
     private String genre = "";
-    /**
-     *      */
+    /** */
     private Artist artist;
-    /**
-     *      */
+    /** */
     private Duration duration = Duration.ZERO;
-    /**
-     *      */
-    private int rate = 0;
-    /**
-     *      */
-    private List<Rating> ratings = new ArrayList<>();
+    /** */
+    private OneElementRank<Music> globalRank = new OneElementRank<>(this);
 
     /**
      *
@@ -49,8 +38,8 @@ public class Music implements Rateable<Music> {
      * @param artist
      */
     public Music(String title, Artist artist) {
-        this.title = title;
-        this.artist = artist;
+        this.setTitle(title);
+        this.setArtist(artist);
     }
 
     /**
@@ -115,20 +104,19 @@ public class Music implements Rateable<Music> {
 
     /**
      *
-     */
-    @Override
-    public void recalculateRate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    /**
-     *
      * @param music
      * @return
      */
     @Override
     public int compareTo(Music music) {
-        return rate - music.rate;
+        int value = artist.compareTo(music.artist);
+        if (value == 0) {
+            value = album.compareToIgnoreCase(music.album);
+            if (value == 0) {
+                value = title.compareToIgnoreCase(music.title);
+            }
+        }
+        return value;
     }
 
     /**
@@ -174,6 +162,9 @@ public class Music implements Rateable<Music> {
      * @param title
      */
     public void setTitle(String title) {
+        if (title == null || title.equals("")) {
+            throw new RuntimeException("Music title must not be null!!!");
+        }
         this.title = title;
     }
 
@@ -222,6 +213,9 @@ public class Music implements Rateable<Music> {
      * @param artist
      */
     public void setArtist(Artist artist) {
+        if (artist == null) {
+            throw new RuntimeException("Music artist must not be null!!!");
+        }
         this.artist = artist;
     }
 
@@ -242,39 +236,23 @@ public class Music implements Rateable<Music> {
     }
 
     /**
-     *
-     * @return
+     * 
+     * @return 
      */
     @Override
-    public int getRate() {
-        return rate;
+    public OneElementRank<Music> getGlobalRank() {
+        return globalRank;
     }
 
     /**
-     *
-     * @param rate
+     * 
+     * @param globalRank 
      */
     @Override
-    public void setRate(int rate) {
-        this.rate = rate;
-    }
-
-    /**
-     *
-     * @return
-     */
-    @Override
-    public List<Rating> getRatings() {
-        return ratings;
-    }
-
-    /**
-     *
-     * @param ratings
-     */
-    @Override
-    public void setRatings(List<Rating> ratings) {
-        this.ratings = ratings;
+    public void setGlobalRank(OneElementRank globalRank) {
+        if (globalRank.getRated() instanceof Music) {
+            this.globalRank = globalRank;
+        }
     }
 
 }

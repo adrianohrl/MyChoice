@@ -25,9 +25,7 @@ public class Participation implements Rateable<Participation> {
     /** */
     private Event event;
     /** */
-    private int rate = 0;
-    /** */
-    private List<Rating> ratings = new ArrayList<>();
+    private OneElementRank<Participation> globalRank = new OneElementRank<>(this);
 
     /**
      * 
@@ -42,9 +40,9 @@ public class Participation implements Rateable<Participation> {
      * @param event 
      */
     public Participation(Artist artist, Calendar finalDate, Event event) {
-        this.artist = artist;
-        this.finalDate = finalDate;
-        this.event = event;
+        this.setArtist(artist);
+        this.setFinalDate(finalDate);
+        this.setEvent(event);
     }  
     
     /**
@@ -56,16 +54,8 @@ public class Participation implements Rateable<Participation> {
      */
     public Participation(Artist artist, Calendar initialDate, Calendar finalDate, Event event) {
         this(artist, finalDate, event);
-        this.initialDate = initialDate;
+        this.setInitialDate(initialDate);
     } 
-
-    /**
-     * 
-     */
-    @Override
-    public void recalculateRate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
     /**
      * 
@@ -74,7 +64,14 @@ public class Participation implements Rateable<Participation> {
      */
     @Override
     public int compareTo(Participation participation) {
-        return rate - participation.rate;
+        int value = event.compareTo(event);
+        if (value == 0) {
+            value = initialDate.compareTo(participation.initialDate);
+            if (value == 0) {
+                value = artist.compareTo(participation.artist);
+            }
+        }
+        return value;
     }
 
     /**
@@ -120,6 +117,9 @@ public class Participation implements Rateable<Participation> {
      * @param artist 
      */
     public void setArtist(Artist artist) {
+        if (artist == null) {
+            throw new RuntimeException("Participation artist must not be null!!!");
+        }
         this.artist = artist;
     }
 
@@ -136,6 +136,11 @@ public class Participation implements Rateable<Participation> {
      * @param initialDate 
      */
     public void setInitialDate(Calendar initialDate) {
+        if (initialDate == null) {
+            throw new RuntimeException("Participation initial date must not be null!!!");
+        } else if (finalDate != null && initialDate.compareTo(finalDate) < 0) {
+            throw new RuntimeException("Participation initial date must be less than its final date!!!");
+        }
         this.initialDate = initialDate;
     }
 
@@ -152,6 +157,11 @@ public class Participation implements Rateable<Participation> {
      * @param finalDate 
      */
     public void setFinalDate(Calendar finalDate) {
+        if (finalDate == null) {
+            throw new RuntimeException("Participation final date must not be null!!!");
+        } else if (initialDate != null && initialDate.compareTo(finalDate) < 0) {
+            throw new RuntimeException("Participation final date must be less than its initial date!!!");
+        }
         this.finalDate = finalDate;
     }
 
@@ -168,6 +178,9 @@ public class Participation implements Rateable<Participation> {
      * @param event 
      */
     public void setEvent(Event event) {
+        if (event == null) {
+            throw new RuntimeException("Participation event must not be null!!!");
+        }
         this.event = event;
     }
 
@@ -176,35 +189,19 @@ public class Participation implements Rateable<Participation> {
      * @return 
      */
     @Override
-    public int getRate() {
-        return rate;
+    public OneElementRank<Participation> getGlobalRank() {
+        return globalRank;
     }
 
     /**
      * 
-     * @param rate 
+     * @param globalRank 
      */
     @Override
-    public void setRate(int rate) {
-        this.rate = rate;
-    }
-
-    /**
-     * 
-     * @return 
-     */
-    @Override
-    public List<Rating> getRatings() {
-        return ratings;
-    }
-
-    /**
-     * 
-     * @param ratings 
-     */
-    @Override
-    public void setRatings(List<Rating> ratings) {
-        this.ratings = ratings;
+    public void setGlobalRank(OneElementRank globalRank) {
+        if (globalRank.getRated() instanceof Participation) {
+            this.globalRank = globalRank;
+        }
     }
     
 }

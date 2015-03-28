@@ -36,6 +36,15 @@ public abstract class User {
         this.nickname = nickname;
         this.email = email;
     }
+    
+    /**
+     * 
+     * @param user
+     * @return 
+     */
+    public int compareTo(User user) {
+        return name.compareToIgnoreCase(user.name);
+    }
 
     /**
      * 

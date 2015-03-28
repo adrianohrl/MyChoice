@@ -12,18 +12,16 @@ import java.util.List;
  *
  * @author Adriano Henrique Rossette Leite <adrianohrl@gmail.com>
  */
-public class Band extends Group<Musician> implements Rateable<Band>, Artist {
+public class Band extends Group<Musician> implements Rateable<Band>, Artist<Band> {
     
     /** */
     private String name;
     /** */
     private boolean performing = false;
     /** */
-    private int rate = 0;
-    /** */
-    private List<Rating> ratings = new ArrayList<>();
-    /** */
     private List<Repertory> repertories = new ArrayList<>();
+    /** */
+    private OneElementRank<Band> globalRank = new OneElementRank<>(this);
 
     /**
      * 
@@ -36,15 +34,7 @@ public class Band extends Group<Musician> implements Rateable<Band>, Artist {
      * @param name 
      */
     public Band(String name) {
-        this.name = name;
-    }
-
-    /**
-     * 
-     */
-    @Override
-    public void recalculateRate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.setName(name);
     }
 
     /**
@@ -54,7 +44,7 @@ public class Band extends Group<Musician> implements Rateable<Band>, Artist {
      */
     @Override
     public int compareTo(Band band) {
-        return rate - band.rate;
+        return name.compareToIgnoreCase(band.name);
     }
     
     /**
@@ -90,6 +80,15 @@ public class Band extends Group<Musician> implements Rateable<Band>, Artist {
      * 
      * @return 
      */
+    @Override
+    public String toString() {
+        return "Band: " + name + "(" + globalRank.getGlobalRate() +  ")";
+    }
+
+    /**
+     * 
+     * @return 
+     */
     public String getName() {
         return name;
     }
@@ -99,6 +98,9 @@ public class Band extends Group<Musician> implements Rateable<Band>, Artist {
      * @param name 
      */
     public void setName(String name) {
+        if (name == null || name.equals("")) {
+            throw new RuntimeException("Band name must not be null!!!");
+        }
         this.name = name;
     }
 
@@ -144,35 +146,19 @@ public class Band extends Group<Musician> implements Rateable<Band>, Artist {
      * @return 
      */
     @Override
-    public int getRate() {
-        return rate;
+    public OneElementRank<Band> getGlobalRank() {
+        return globalRank;
     }
 
     /**
      * 
-     * @param rate 
+     * @param globalRank 
      */
     @Override
-    public void setRate(int rate) {
-        this.rate = rate;
-    }
-
-    /**
-     * 
-     * @return 
-     */
-    @Override
-    public List<Rating> getRatings() {
-        return ratings;
-    }
-
-    /**
-     * 
-     * @param ratings 
-     */
-    @Override
-    public void setRatings(List<Rating> ratings) {
-        this.ratings = ratings;
+    public void setGlobalRank(OneElementRank globalRank) {
+        if (globalRank.getRated() instanceof Band) {
+            this.globalRank = globalRank;
+        }
     }
     
 }

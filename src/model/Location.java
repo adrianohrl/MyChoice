@@ -5,7 +5,6 @@
  */
 package model;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -14,51 +13,69 @@ import java.util.List;
  */
 public class Location implements Rateable<Location> {
 
-    /** */
+    /**
+     *
+     */
     private String name;
-    /** */
+    /**
+     *
+     */
     private String street = "";
-    /** */
+    /**
+     *
+     */
     private String identifier = "";
-    /** */
+    /**
+     *
+     */
     private String district = "";
-    /** */
+    /**
+     *
+     */
     private String zip = "";
-    /** */
+    /**
+     *
+     */
     private String city;
-    /** */
+    /**
+     *
+     */
     private String county = "";
-    /** */
+    /**
+     *
+     */
     private String state;
-    /** */
+    /**
+     *
+     */
     private String country;
-    /** */
-    private int rate = 0;
-    /** */
-    private List<Rating> ratings = new ArrayList<>();
+    /**
+     *
+     */
+    private OneElementRank<Location> globalRank = new OneElementRank<>(this);
 
     /**
-     * 
+     *
      */
     public Location() {
     }
 
     /**
-     * 
+     *
      * @param name
      * @param city
      * @param state
-     * @param country 
+     * @param country
      */
     public Location(String name, String city, String state, String country) {
-        this.name = name;
-        this.city = city;
-        this.state = state;
-        this.country = country;
+        this.setName(name);
+        this.setCity(city);
+        this.setState(state);
+        this.setCountry(country);
     }
-    
+
     /**
-     * 
+     *
      * @param name
      * @param street
      * @param identifier
@@ -67,7 +84,7 @@ public class Location implements Rateable<Location> {
      * @param city
      * @param county
      * @param state
-     * @param country 
+     * @param country
      */
     public Location(String name, String street, String identifier, String district, String zip, String city, String county, String state, String country) {
         this(name, city, state, country);
@@ -79,196 +96,227 @@ public class Location implements Rateable<Location> {
     }
 
     /**
-     * 
-     */
-    @Override
-    public void recalculateRate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    /**
-     * 
+     *
      * @param location
-     * @return 
+     * @return
      */
     @Override
     public int compareTo(Location location) {
-        return rate - location.rate;
+        int value = name.compareToIgnoreCase(location.name);
+        if (value == 0) {
+            value = city.compareToIgnoreCase(location.city);
+            if (value == 0) {
+                value = county.compareToIgnoreCase(location.county);
+                if (value == 0) {
+                    value = state.compareToIgnoreCase(location.state);
+                    if (value == 0) {
+                        value = country.compareToIgnoreCase(location.country);
+                        if (value == 0) {
+                            value = street.compareToIgnoreCase(location.street);
+                            if (value == 0) {
+                                value = identifier.compareToIgnoreCase(location.identifier);
+                                if (value == 0) {
+                                    value = district.compareToIgnoreCase(location.district);
+                                    if (value == 0) {
+                                        value = zip.compareToIgnoreCase(location.zip);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return value;
     }
 
     /**
-     * 
+     *
      * @param obj
-     * @return 
+     * @return
      */
     @Override
-    public boolean equals(Object obj) {
+    public boolean equals(Object obj
+    ) {
         return obj instanceof Rateable && equals((Rateable) obj);
     }
 
     /**
-     * 
+     *
      * @param rateable
-     * @return 
+     * @return
      */
     @Override
-    public boolean equals(Rateable rateable) {
+    public boolean equals(Rateable rateable
+    ) {
         return rateable instanceof Location && equals((Location) rateable);
-    }
-    
-    /**
-     * 
-     * @param location
-     * @return 
-     */
-    public boolean equals(Location location) {
-        return location != null && name.equalsIgnoreCase(location.name) && street.equalsIgnoreCase(location.street) &&
-                identifier.equalsIgnoreCase(location.identifier) && district.equalsIgnoreCase(location.district) &&
-                zip.equalsIgnoreCase(location.zip) && city.equalsIgnoreCase(location.city) && county.equalsIgnoreCase(location.county) &&
-                state.equalsIgnoreCase(location.state) && country.equalsIgnoreCase(location.country);
     }
 
     /**
-     * 
-     * @return 
+     *
+     * @param location
+     * @return
+     */
+    public boolean equals(Location location) {
+        return location != null && name.equalsIgnoreCase(location.name) && street.equalsIgnoreCase(location.street)
+                && identifier.equalsIgnoreCase(location.identifier) && district.equalsIgnoreCase(location.district)
+                && zip.equalsIgnoreCase(location.zip) && city.equalsIgnoreCase(location.city) && county.equalsIgnoreCase(location.county)
+                && state.equalsIgnoreCase(location.state) && country.equalsIgnoreCase(location.country);
+    }
+
+    /**
+     *
+     * @return
      */
     public String getName() {
         return name;
     }
 
     /**
-     * 
-     * @param name 
+     *
+     * @param name
      */
     public void setName(String name) {
+        if (name == null || name.equals("")) {
+            throw new RuntimeException("Location name must not be null!!!");
+        }
         this.name = name;
     }
 
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getStreet() {
         return street;
     }
 
     /**
-     * 
-     * @param street 
+     *
+     * @param street
      */
     public void setStreet(String street) {
         this.street = street;
     }
 
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getIdentifier() {
         return identifier;
     }
 
     /**
-     * 
-     * @param identifier 
+     *
+     * @param identifier
      */
     public void setIdentifier(String identifier) {
         this.identifier = identifier;
     }
 
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getDistrict() {
         return district;
     }
 
     /**
-     * 
-     * @param district 
+     *
+     * @param district
      */
     public void setDistrict(String district) {
         this.district = district;
     }
 
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getZip() {
         return zip;
     }
 
     /**
-     * 
-     * @param zip 
+     *
+     * @param zip
      */
     public void setZip(String zip) {
         this.zip = zip;
     }
 
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getCity() {
         return city;
     }
 
     /**
-     * 
-     * @param city 
+     *
+     * @param city
      */
     public void setCity(String city) {
+        if (city == null || city.equals("")) {
+            throw new RuntimeException("City must not be null!!!");
+        }
         this.city = city;
     }
 
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getCounty() {
         return county;
     }
 
     /**
-     * 
-     * @param county 
+     *
+     * @param county
      */
     public void setCounty(String county) {
         this.county = county;
     }
 
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getState() {
         return state;
     }
 
     /**
-     * 
-     * @param state 
+     *
+     * @param state
      */
     public void setState(String state) {
+        if (state == null || state.equals("")) {
+            throw new RuntimeException("State must not be null!!!");
+        }
         this.state = state;
     }
 
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public String getCountry() {
         return country;
     }
 
     /**
-     * 
-     * @param country 
+     *
+     * @param country
      */
     public void setCountry(String country) {
+        if (country == null || country.equals("")) {
+            throw new RuntimeException("Country must not be null!!!");
+        }
         this.country = country;
     }
 
@@ -277,35 +325,19 @@ public class Location implements Rateable<Location> {
      * @return 
      */
     @Override
-    public int getRate() {
-        return rate;
+    public OneElementRank<Location> getGlobalRank() {
+        return globalRank;
     }
 
     /**
      * 
-     * @param rate 
+     * @param globalRank 
      */
     @Override
-    public void setRate(int rate) {
-        this.rate = rate;
+    public void setGlobalRank(OneElementRank globalRank) {
+        if (globalRank.getRated() instanceof Location) {
+            this.globalRank = globalRank;
+        }
     }
-
-    /**
-     * 
-     * @return 
-     */
-    @Override
-    public List<Rating> getRatings() {
-        return ratings;
-    }
-
-    /**
-     * 
-     * @param ratings 
-     */
-    @Override
-    public void setRatings(List<Rating> ratings) {
-        this.ratings = ratings;
-    }
-
+    
 }

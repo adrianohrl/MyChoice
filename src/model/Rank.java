@@ -6,7 +6,6 @@
 package model;
 
 import java.util.Iterator;
-import java.util.List;
 import java.util.TreeSet;
 
 /**
@@ -15,96 +14,70 @@ import java.util.TreeSet;
  * @param <E>
  */
 public class Rank<E extends Rateable> {
-    
-    /** */
-    private final RankComparator<E> comparator = new RankComparator<>();
-    private TreeSet<Element<E>> elements = new TreeSet(comparator);
 
     /**
-     * 
+     *      */
+    private TreeSet<Rating<E>> ratings = new TreeSet();
+
+    /**
+     *
      */
     public Rank() {
     }
 
     /**
-     * 
-     * @param ratings 
-     */
-    public Rank(List<Rating<E>> ratings) {
-        //create elements given all ratings
-        sort();
-    }
-    
-    /**
-     * 
-     */
-    private void sort() {
-    }
-    
-    /**
-     * 
+     *
      * @param rating
      */
     public void add(Rating<E> rating) {
-        //elements.add(rating);
-        sort();
+        if (!rating.isValid()) {
+            if (ratings.contains(rating)) {
+                ratings.remove(rating);
+            }
+        } else if (!ratings.add(rating)) {
+            ratings.remove(rating);
+            ratings.add(rating);
+        }
     }
-    
+
     /**
-     * 
-     * @param element
-     */
-    public void add(Element<E> element) {
-        elements.add(element);
-        sort();
-    }
-    
-    /**
-     * 
-     * @return 
-     */
-    public Element<E> getHighest() {
-        return elements.last();
-    }
-    
-    /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public int size() {
-        return elements.size();
+        return ratings.size();
     }
-    
+
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
     public boolean isEmpty() {
-        return elements.isEmpty();
-    }
-    
-    /**
-     * 
-     * @return 
-     */
-    public Iterator iterator() {
-        return elements.descendingIterator();
+        return ratings.isEmpty();
     }
 
     /**
-     * 
-     * @return 
+     *
+     * @return
      */
-    public TreeSet<Element<E>> getElements() {
-        return elements;
+    public Iterator<Rating<E>> iterator() {
+        return ratings.iterator();
     }
 
     /**
-     * 
-     * @param elements 
+     *
+     * @return
      */
-    public void setElements(TreeSet<Element<E>> elements) {
-        this.elements = elements;
+    public TreeSet<Rating<E>> getRatings() {
+        return ratings;
     }
-    
+
+    /**
+     *
+     * @param ratings
+     */
+    public void setRatings(TreeSet<Rating<E>> ratings) {
+        this.ratings = ratings;
+    }
+
 }

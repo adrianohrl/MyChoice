@@ -25,9 +25,7 @@ public class Event implements Rateable<Event> {
     /** */
     private List<Participation> participations = new ArrayList<>();
     /** */
-    private int rate = 0;
-    /** */
-    private List<Rating> ratings = new ArrayList<>();
+    private OneElementRank<Event> globalRank = new OneElementRank<>(this);
 
     /**
      * 
@@ -40,7 +38,7 @@ public class Event implements Rateable<Event> {
      * @param location 
      */
     public Event(Location location) {
-        this.location = location;
+        this.setLocation(location);
         this.audience = new Audience();
     }
 
@@ -51,7 +49,18 @@ public class Event implements Rateable<Event> {
      */
     public Event(Location location, Calendar date) {
         this(location);
-        this.date = date;
+        this.setDate(date);
+    }
+
+    /**
+     * 
+     * @param location
+     * @param dayOfMonth
+     * @param month
+     * @param year 
+     */
+    public Event(Location location, int dayOfMonth, int month, int year) {
+        this(location, new GregorianCalendar(year, month, dayOfMonth));
     }
 
     /**
@@ -67,10 +76,15 @@ public class Event implements Rateable<Event> {
 
     /**
      * 
+     * @param location
+     * @param dayOfMonth
+     * @param month
+     * @param year
+     * @param participations 
      */
-    @Override
-    public void recalculateRate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Event(Location location, int dayOfMonth, int month, int year, List<Participation> participations) {
+        this(location, dayOfMonth, month, year);
+        this.participations = participations;
     }
 
     /**
@@ -80,7 +94,11 @@ public class Event implements Rateable<Event> {
      */
     @Override
     public int compareTo(Event event) {
-        return rate - event.rate;
+        int value = date.compareTo(event.date);
+        if (value == 0) {
+            value = location.compareTo(event.location);
+        }
+        return value;
     }
     
     /**
@@ -125,6 +143,13 @@ public class Event implements Rateable<Event> {
      * @param date 
      */
     public void setDate(Calendar date) {
+        if (date.get(Calendar.YEAR) == 0) {
+            throw new RuntimeException("Year must be greater than zero!!!");
+        } else if (date.get(Calendar.MONTH) > 11) {
+            throw new RuntimeException("Month must be less than twelve!!!");
+        } else if (date.get(Calendar.DAY_OF_MONTH) == 0) {
+            throw new RuntimeException("Day of month must be greater than zero!!!");
+        }
         this.date = date;
     }
 
@@ -141,6 +166,9 @@ public class Event implements Rateable<Event> {
      * @param location 
      */
     public void setLocation(Location location) {
+        if (location == null) {
+            throw new RuntimeException("Location must not be null!!!");
+        }
         this.location = location;
     }
 
@@ -181,35 +209,19 @@ public class Event implements Rateable<Event> {
      * @return 
      */
     @Override
-    public int getRate() {
-        return rate;
+    public OneElementRank<Event> getGlobalRank() {
+        return globalRank;
     }
 
     /**
      * 
-     * @param rate 
+     * @param globalRank 
      */
     @Override
-    public void setRate(int rate) {
-        this.rate = rate;
-    }
-
-    /**
-     * 
-     * @return 
-     */
-    @Override
-    public List<Rating> getRatings() {
-        return ratings;
-    }
-
-    /**
-     * 
-     * @param ratings 
-     */
-    @Override
-    public void setRatings(List<Rating> ratings) {
-        this.ratings = ratings;
+    public void setGlobalRank(OneElementRank globalRank) {
+        if (globalRank.getRated() instanceof Event) {
+            this.globalRank = globalRank;
+        }
     }
     
 }

@@ -5,9 +5,6 @@
  */
 package model;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  *
  * @author Adriano Henrique Rossette Leite <adrianohrl@gmail.com>
@@ -23,14 +20,24 @@ public class Equipment implements Rateable<Equipment> {
     /** */
     private String note;
     /** */
-    private int rate = 0;
-    /** */
-    private List<Rating> ratings = new ArrayList<>();
+    private OneElementRank<Equipment> globalRank = new OneElementRank<>(this);
 
     /**
      * 
      */
     public Equipment() {
+    }
+    
+    /**
+     * 
+     * @param category
+     * @param brand
+     * @param model 
+     */
+    public Equipment(String category, String brand, String model) {
+        this.setCategory(category);
+        this.setBrand(brand);
+        this.setModel(model);
     }
 
     /**
@@ -41,9 +48,7 @@ public class Equipment implements Rateable<Equipment> {
      * @param note 
      */
     public Equipment(String category, String brand, String model, String note) {
-        this.category = category;
-        this.brand = brand;
-        this.model = model;
+        this(category, brand, model);
         this.note = note;
     }
 
@@ -54,15 +59,14 @@ public class Equipment implements Rateable<Equipment> {
      */
     @Override
     public int compareTo(Equipment equipment) {
-        return rate - equipment.rate;
-    }
-
-    /**
-     * 
-     */
-    @Override
-    public void recalculateRate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        int value = category.compareToIgnoreCase(equipment.category);
+        if (value == 0) {
+            value = brand.compareToIgnoreCase(equipment.brand);
+            if (value == 0) {
+                value = model.compareToIgnoreCase(equipment.model);
+            }
+        }
+        return value;
     }
     
     /**
@@ -108,6 +112,9 @@ public class Equipment implements Rateable<Equipment> {
      * @param category 
      */
     public void setCategory(String category) {
+        if (category == null || category.equals("")) {
+            throw new RuntimeException("Equipment category must not be null!!!");
+        }
         this.category = category;
     }
 
@@ -124,6 +131,9 @@ public class Equipment implements Rateable<Equipment> {
      * @param brand 
      */
     public void setBrand(String brand) {
+        if (brand == null || brand.equals("")) {
+            throw new RuntimeException("Equipment brand must not be null!!!");
+        }
         this.brand = brand;
     }
 
@@ -140,6 +150,9 @@ public class Equipment implements Rateable<Equipment> {
      * @param model 
      */
     public void setModel(String model) {
+        if (model == null || model.equals("")) {
+            throw new RuntimeException("Equipment model must not be null!!!");
+        }
         this.model = model;
     }
 
@@ -164,35 +177,19 @@ public class Equipment implements Rateable<Equipment> {
      * @return 
      */
     @Override
-    public int getRate() {
-        return rate;
+    public OneElementRank<Equipment> getGlobalRank() {
+        return globalRank;
     }
 
     /**
      * 
-     * @param rate 
+     * @param globalRank 
      */
     @Override
-    public void setRate(int rate) {
-        this.rate = rate;
-    }
-
-    /**
-     * 
-     * @return 
-     */
-    @Override
-    public List<Rating> getRatings() {
-        return ratings;
-    }
-
-    /**
-     * 
-     * @param ratings 
-     */
-    @Override
-    public void setRatings(List<Rating> ratings) {
-        this.ratings = ratings;
+    public void setGlobalRank(OneElementRank globalRank) {
+        if (globalRank.getRated() instanceof Equipment) {
+            this.globalRank = globalRank;
+        }
     }
     
 }

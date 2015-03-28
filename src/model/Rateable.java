@@ -5,8 +5,6 @@
  */
 package model;
 
-import java.util.List;
-
 /**
  *
  * @author Adriano Henrique Rossette Leite <adrianohrl@gmail.com>
@@ -33,29 +31,12 @@ public interface Rateable<T> extends Comparable<T> {
      * 
      * @return 
      */
-    public abstract int getRate();
+    public abstract OneElementRank getGlobalRank();
     
     /**
      * 
-     * @param rate 
+     * @param globalRank 
      */
-    public abstract void setRate(int rate);
-    
-    /**
-     * 
-     */
-    public abstract void recalculateRate();
-    
-    /**
-     * 
-     * @return 
-     */
-    public abstract List<Rating> getRatings();
-    
-    /**
-     * 
-     * @param ratings 
-     */
-    public abstract void setRatings(List<Rating> ratings);
+    public abstract void setGlobalRank(OneElementRank globalRank);
     
 }

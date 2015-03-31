@@ -8,8 +8,9 @@ package model;
 /**
  *
  * @author Adriano Henrique Rossette Leite <adrianohrl@gmail.com>
+ * @param <T>
  */
-public interface Respondent {
+public interface Respondent<T> extends Comparable<T> {
     
     /**
      * 

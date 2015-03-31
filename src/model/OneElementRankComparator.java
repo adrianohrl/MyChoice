@@ -12,7 +12,7 @@ import java.util.Comparator;
  * @author Adriano Henrique Rossette Leite <adrianohrl@gmail.com>
  * @param <E>
  */
-public class RankComparator<E extends Rateable> implements Comparator<Rating<E>> {
+public class OneElementRankComparator<E extends Rateable> implements Comparator<OneElementRank<E>> {
 
     /**
      * 
@@ -21,8 +21,18 @@ public class RankComparator<E extends Rateable> implements Comparator<Rating<E>>
      * @return 
      */
     @Override
-    public int compare(Rating<E> element1, Rating<E> element2) {
-        return element1.compareTo(element2);
+    public int compare(OneElementRank<E> element1, OneElementRank<E> element2) {
+        return compare(element1.getRated(), element2.getRated());
+    }
+    
+    /**
+     * 
+     * @param rated1
+     * @param rated2
+     * @return 
+     */
+    private int compare(E rated1, E rated2) {
+        return rated1.compareTo(rated2);
     }
     
 }

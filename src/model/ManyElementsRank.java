@@ -12,16 +12,12 @@ import java.util.List;
  * @author Adriano Henrique Rossette Leite <adrianohrl@gmail.com>
  * @param <E>
  */
-public class ManyElementsRank<E extends Rateable> extends Rank<E>  {
-    
-    /** */
-    private OneElementRank<OneElementRank<E>> elements = new OneElementRank<>();
+public class ManyElementsRank<E extends Rateable> extends Rank<OneElementRank<E>>  {
     
     /**
      * 
      */
     public ManyElementsRank() {
-        
     }
     
     /**
@@ -29,23 +25,24 @@ public class ManyElementsRank<E extends Rateable> extends Rank<E>  {
      * @param ratings 
      */
     public ManyElementsRank(List<Rating<E>> ratings) {
-        
+        for (Rating<E> rating : ratings) {
+            add(rating);
+        }
     }
-
+    
     /**
      * 
-     * @return 
+     * @param rating 
      */
-    public OneElementRank<OneElementRank<E>> getElements() {
-        return elements;
-    }
-
-    /**
-     * 
-     * @param elements 
-     */
-    public void setElements(OneElementRank<OneElementRank<E>> elements) {
-        this.elements = elements;
+    public void add(Rating<E> rating) {
+        OneElementRank<E> element = new OneElementRank<>(rating.getRated());
+        if (super.contains(element)) {
+            element = get(element);
+            element.add(rating);
+        } else {
+            element.add(rating);
+            super.add(element);
+        }
     }
     
 }

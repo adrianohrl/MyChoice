@@ -148,6 +148,15 @@ public class Music implements Rateable<Music> {
         return music != null && title.equalsIgnoreCase(music.title) && album.equalsIgnoreCase(music.album)
                 && artist.equals(music.artist) && genre.equalsIgnoreCase(music.genre) && duration.equals(music.duration);
     }
+    
+    /**
+     * 
+     * @return 
+     */
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + ": " + title + " (by: " + artist + ")";
+    }
 
     /**
      *

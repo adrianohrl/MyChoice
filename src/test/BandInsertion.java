@@ -45,10 +45,35 @@ public class BandInsertion {
         dt.getRepertories().add(new Repertory(octavarium));
         
         List<Music> systematicChaos = new ArrayList<>();
+        systematicChaos.add(new Music("In the Presence of Enimies - Part I", "Systematic Chaos", "Progressive Rock", dt, "9:00"));
+        systematicChaos.add(new Music("Forsaken", "Systematic Chaos", "Progressive Rock", dt, "5:35"));
+        systematicChaos.add(new Music("Constant Motion", "Systematic Chaos", "Progressive Rock", dt, "6:55"));
+        systematicChaos.add(new Music("The Dark Eternal Night", "Systematic Chaos", "Progressive Rock", dt, "8:53"));
+        systematicChaos.add(new Music("Repentance", "Systematic Chaos", "Progressive Rock", dt, "10:43"));
+        systematicChaos.add(new Music("Prophets of War", "Systematic Chaos", "Progressive Rock", dt, "6:00"));
+        systematicChaos.add(new Music("The Ministry of Lost Souls", "Systematic Chaos", "Progressive Rock", dt, "14:57"));
+        systematicChaos.add(new Music("In the Presence of Enemies - Part II", "Systematic Chaos", "Progressive Rock", dt, "16:38"));
         dt.getRepertories().add(new Repertory(systematicChaos));
         
         List<Music> imagesAndWords = new ArrayList<>();
+        imagesAndWords.add(new Music("Pull me Under", "Images and Words", "Progressice Rock", dt, "8:14"));
+        imagesAndWords.add(new Music("Another Day", "Images and Words", "Progressice Rock", dt, "4:23"));
+        imagesAndWords.add(new Music("Take the Time", "Images and Words", "Progressice Rock", dt, "8:21"));
+        imagesAndWords.add(new Music("Surrounded", "Images and Words", "Progressice Rock", dt, "5:30"));
+        imagesAndWords.add(new Music("Metropolis - Part I: The Miracle and the Sleeper", "Images and Words", "Progressice Rock", dt, "9:32"));
+        imagesAndWords.add(new Music("Under a Glass Moon", "Images and Words", "Progressice Rock", dt, "7:03"));
+        imagesAndWords.add(new Music("Wait for Sleep", "Images and Words", "Progressice Rock", dt, "2:31"));
+        imagesAndWords.add(new Music("Learning to Live", "Images and Words", "Progressice Rock", dt, "11:30"));
         dt.getRepertories().add(new Repertory(imagesAndWords));
+        
+        List<Music> blackCloudsAndSilver = new ArrayList<>();
+        blackCloudsAndSilver.add(new Music("A Nightmare to Remember", "Black Clouds & Silver", "Progressive Rock", dt, "16:10"));
+        blackCloudsAndSilver.add(new Music("A Rite of Passage", "Black Clouds & Silver", "Progressive Rock", dt, "8:35"));
+        blackCloudsAndSilver.add(new Music("Wither", "Black Clouds & Silver", "Progressive Rock", dt, "5:25"));
+        blackCloudsAndSilver.add(new Music("The Shattered Fortress", "Black Clouds & Silver", "Progressive Rock", dt, "12:46"));
+        blackCloudsAndSilver.add(new Music("The Best of Times", "Black Clouds & Silver", "Progressive Rock", dt, "13:19"));
+        blackCloudsAndSilver.add(new Music("The Count of Tuscany", "Black Clouds & Silver", "Progressive Rock", dt, "19:16"));
+        dt.getRepertories().add(new Repertory(blackCloudsAndSilver));
         
         return dt;
     }

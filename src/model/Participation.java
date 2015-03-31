@@ -138,7 +138,7 @@ public class Participation implements Rateable<Participation> {
     public void setInitialDate(Calendar initialDate) {
         if (initialDate == null) {
             throw new RuntimeException("Participation initial date must not be null!!!");
-        } else if (finalDate != null && initialDate.compareTo(finalDate) < 0) {
+        } else if (finalDate != null && initialDate.compareTo(finalDate) > 0) {
             throw new RuntimeException("Participation initial date must be less than its final date!!!");
         }
         this.initialDate = initialDate;
@@ -159,7 +159,7 @@ public class Participation implements Rateable<Participation> {
     public void setFinalDate(Calendar finalDate) {
         if (finalDate == null) {
             throw new RuntimeException("Participation final date must not be null!!!");
-        } else if (initialDate != null && initialDate.compareTo(finalDate) < 0) {
+        } else if (initialDate != null && initialDate.compareTo(finalDate) > 0) {
             throw new RuntimeException("Participation final date must be less than its initial date!!!");
         }
         this.finalDate = finalDate;

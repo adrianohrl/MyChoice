@@ -13,11 +13,10 @@ import java.util.TreeSet;
  * @author Adriano Henrique Rossette Leite <adrianohrl@gmail.com>
  * @param <E>
  */
-public class Rank<E extends Rateable> {
+public class Rank<E extends Comparable> {
 
-    /**
-     *      */
-    private TreeSet<Rating<E>> ratings = new TreeSet();
+    /** */
+    private TreeSet<E> elements = new TreeSet();
 
     /**
      *
@@ -27,17 +26,34 @@ public class Rank<E extends Rateable> {
 
     /**
      *
-     * @param rating
+     * @param element
      */
-    public void add(Rating<E> rating) {
-        if (!rating.isValid()) {
-            if (ratings.contains(rating)) {
-                ratings.remove(rating);
-            }
-        } else if (!ratings.add(rating)) {
-            ratings.remove(rating);
-            ratings.add(rating);
+    public void add(E element) {
+        if (element != null && !elements.add(element)) {
+            elements.remove(element);
+            elements.add(element);
         }
+    }
+    
+    /**
+     * 
+     * @param clone 
+     */
+    public E get(E clone) {
+        for (E element : elements) {
+            if (element.equals(clone)) {
+                return element;
+            }
+        }
+        return null;
+    }
+    
+    /**
+     * 
+     * @param element 
+     */
+    public void remove(E element) {
+        elements.remove(element);
     }
 
     /**
@@ -45,7 +61,7 @@ public class Rank<E extends Rateable> {
      * @return
      */
     public int size() {
-        return ratings.size();
+        return elements.size();
     }
 
     /**
@@ -53,31 +69,54 @@ public class Rank<E extends Rateable> {
      * @return
      */
     public boolean isEmpty() {
-        return ratings.isEmpty();
+        return elements.isEmpty();
     }
 
     /**
      *
      * @return
      */
-    public Iterator<Rating<E>> iterator() {
-        return ratings.iterator();
+    public Iterator<E> iterator() {
+        return elements.iterator();
+    }
+    
+    /**
+     * 
+     * @param element
+     * @return 
+     */
+    public boolean contains(E element) {
+        return elements.contains(element);
+    }
+    
+    /**
+     * 
+     * @return 
+     */
+    @Override
+    public String toString() {
+        String str = "Sorted Rank: ";
+        int counter = 0;
+        for (E element : elements) {
+            str += "\nPosition: " + ++counter + "\n" + element;
+        }
+        return str;
     }
 
     /**
      *
      * @return
      */
-    public TreeSet<Rating<E>> getRatings() {
-        return ratings;
+    public TreeSet<E> getElements() {
+        return elements;
     }
 
     /**
      *
-     * @param ratings
+     * @param elements
      */
-    public void setRatings(TreeSet<Rating<E>> ratings) {
-        this.ratings = ratings;
+    public void setElements(TreeSet<E> elements) {
+        this.elements = elements;
     }
 
 }

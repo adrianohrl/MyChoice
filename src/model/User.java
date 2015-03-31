@@ -65,6 +65,15 @@ public abstract class User {
        return user != null && name.equalsIgnoreCase(user.name) && 
                nickname.equalsIgnoreCase(user.nickname) && email.equalsIgnoreCase(user.email);
     }
+    
+    /**
+     * 
+     * @return 
+     */
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + ": " + name + " (" + nickname + ")";
+    }
 
     /**
      * descricao desse metodo

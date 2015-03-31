@@ -5,8 +5,6 @@
  */
 package model;
 
-import java.util.List;
-
 /**
  *
  * @author Adriano Henrique Rossette Leite <adrianohrl@gmail.com>
@@ -162,6 +160,15 @@ public class Location implements Rateable<Location> {
                 && identifier.equalsIgnoreCase(location.identifier) && district.equalsIgnoreCase(location.district)
                 && zip.equalsIgnoreCase(location.zip) && city.equalsIgnoreCase(location.city) && county.equalsIgnoreCase(location.county)
                 && state.equalsIgnoreCase(location.state) && country.equalsIgnoreCase(location.country);
+    }
+    
+    /**
+     * 
+     * @return 
+     */
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + ": " + name + " (" + city + " - " + state + ")";
     }
 
     /**

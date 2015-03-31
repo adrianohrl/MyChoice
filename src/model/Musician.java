@@ -12,7 +12,7 @@ import java.util.List;
  *
  * @author Adriano Henrique Rossette Leite <adrianohrl@gmail.com>
  */
-public class Musician extends Listener implements Rateable<Musician>, Artist<Musician> {
+public class Musician extends Listener<Musician> implements Rateable<Musician>, Artist<Musician> {
     
     /** */
     private int ability = 0;
@@ -46,7 +46,6 @@ public class Musician extends Listener implements Rateable<Musician>, Artist<Mus
      * @param musician
      * @return 
      */
-    @Override
     public int compareTo(Musician musician) {
         return super.compareTo(musician);
     }

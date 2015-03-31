@@ -42,6 +42,7 @@ public class Rating<T extends Rateable> implements Comparable<Rating> {
         this.setRate(rate);
         this.setRespondent(respondent);
         this.setRated(rated);
+        //System.out.println(this);
     }
 
     /**
@@ -74,6 +75,10 @@ public class Rating<T extends Rateable> implements Comparable<Rating> {
         int value = rating.rate - rate;
         if (value == 0) {
             value = rated.compareTo(rating.rated);
+            if (value == 0) {                
+                RespondentComparator comparator = new RespondentComparator();
+                value = comparator.compare(respondent, rating.respondent);
+            }
         }
         return value;
     }
@@ -95,6 +100,15 @@ public class Rating<T extends Rateable> implements Comparable<Rating> {
      */
     public boolean equals(Rating rating) {
         return rating != null && respondent.equals(rating.respondent) && rated.equals(rating.rated);
+    }
+    
+    /**
+     * 
+     * @return 
+     */
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + ": " + rate + " star(s) from " + respondent + " to " + rated + "!!!";
     }
 
     /**

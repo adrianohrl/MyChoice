@@ -82,7 +82,7 @@ public class Band extends Group<Musician> implements Rateable<Band>, Artist<Band
      */
     @Override
     public String toString() {
-        return "Band: " + name + "(" + globalRank.getGlobalRate() +  ")";
+        return getClass().getSimpleName() + ": " + name; // + "(" + globalRank.getGlobalRate() +  ")";
     }
 
     /**
@@ -136,7 +136,7 @@ public class Band extends Group<Musician> implements Rateable<Band>, Artist<Band
     @Override
     public void setPerforming(boolean performing) {
         for (Musician member : super.getMembers()) {
-            member.setPerforming(performing);;
+            member.setPerforming(performing);
         }
         this.performing = performing;
     }

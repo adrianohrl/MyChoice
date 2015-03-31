@@ -12,7 +12,7 @@ import java.util.Iterator;
  * @author Adriano Henrique Rossette Leite <adrianohrl@gmail.com>
  * @param <E>
  */
-public class OneElementRank<E extends Rateable> extends Rank<E> implements Rateable<OneElementRank<E>> {
+public class OneElementRank<E extends Rateable> extends Rank<Rating<E>> implements Comparable<OneElementRank<E>> {
 
     /** */
     private double globalRate = 0.0;
@@ -37,23 +37,27 @@ public class OneElementRank<E extends Rateable> extends Rank<E> implements Ratea
     @Override
     public void add(Rating<E> rating) {
         if (rated.equals(rating.getRated())) {
-            super.add(rating);
-            updateGlobalRate();
+            if (!rating.isValid()) {
+                if (super.contains(rating)) {
+                    super.remove(rating);
+                }
+            } else {
+                super.add(rating);
+            }
+            if (!super.isEmpty()) {
+                updateGlobalRate();
+            }
         }
     }
     
-    public boolean equals(Object obj) {
-        return obj instanceof Rateable && equals((Rateable) obj);
-    }
-
     /**
      * 
-     * @param rateable
+     * @param obj
      * @return 
      */
     @Override
-    public boolean equals(Rateable rateable) {
-        return rateable instanceof OneElementRank && equals((OneElementRank) rateable);
+    public boolean equals(Object obj) {
+        return obj instanceof OneElementRank && equals((OneElementRank) obj);
     }
     
     /**
@@ -62,7 +66,7 @@ public class OneElementRank<E extends Rateable> extends Rank<E> implements Ratea
      * @return 
      */
     public boolean equals(OneElementRank oneElementRank) {
-        return oneElementRank != null && globalRate == oneElementRank.globalRate && rated.equals(oneElementRank.rated);
+        return oneElementRank != null && rated.equals(oneElementRank.rated); // && globalRate == oneElementRank.globalRate
     }
 
     /**
@@ -72,6 +76,9 @@ public class OneElementRank<E extends Rateable> extends Rank<E> implements Ratea
      */
     @Override
     public int compareTo(OneElementRank<E> oneElementRank) {
+        if (rated.equals(oneElementRank.rated)) {
+            return 0;
+        }
         Double d = globalRate;
         int value = d.compareTo(oneElementRank.globalRate);
         if (value == 0) {
@@ -90,7 +97,24 @@ public class OneElementRank<E extends Rateable> extends Rank<E> implements Ratea
             Rating<E> rating = it.next();
             sum += rating.getRate();
         }
-        globalRate = sum / counter;
+        globalRate = sum;
+        if (counter > 0) {
+            globalRate /= counter;
+        }
+    }
+    
+    /**
+     * 
+     * @return 
+     */
+    @Override
+    public String toString() {
+        String str = rated.toString() + "\nMean Rating: " + globalRate;
+        int counter = 0;
+        for (Rating<E> rating : getElements()) {
+            str += "\n(" + ++counter + ")\t" + rating;
+        }
+        return str;
     }
 
     /**
@@ -126,24 +150,6 @@ public class OneElementRank<E extends Rateable> extends Rank<E> implements Ratea
             throw new RuntimeException("One Element Rank rated element must not be null!!!");
         }
         this.rated = rated;
-    }
-
-    /**
-     * 
-     * @return 
-     */
-    @Override
-    public OneElementRank getGlobalRank() {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
-
-    /**
-     * 
-     * @param globalRank 
-     */
-    @Override
-    public void setGlobalRank(OneElementRank globalRank) {
-        throw new UnsupportedOperationException("Not supported yet.");
     }
 
 }

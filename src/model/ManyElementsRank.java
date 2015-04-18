@@ -38,7 +38,9 @@ public class ManyElementsRank<E extends Rateable> extends Rank<OneElementRank<E>
         OneElementRank<E> element = new OneElementRank<>(rating.getRated());
         if (super.contains(element)) {
             element = get(element);
+            super.remove(element);
             element.add(rating);
+            super.add(element);
         } else {
             element.add(rating);
             super.add(element);

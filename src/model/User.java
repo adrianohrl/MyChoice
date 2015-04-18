@@ -72,7 +72,8 @@ public abstract class User {
      */
     @Override
     public String toString() {
-        return getClass().getSimpleName() + ": " + name + " (" + nickname + ")";
+        //return getClass().getSimpleName() + ": " + name + " (" + nickname + ")";
+        return getClass().getSimpleName() + ": " + name;
     }
 
     /**

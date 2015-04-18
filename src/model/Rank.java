@@ -29,10 +29,13 @@ public class Rank<E extends Comparable> {
      * @param element
      */
     public void add(E element) {
-        if (element != null && !elements.add(element)) {
-            elements.remove(element);
-            elements.add(element);
+        if (element == null) {
+            return;
         }
+        if (contains(element)) {
+            remove(element);
+        } 
+        elements.add(element);
     }
     
     /**
@@ -53,7 +56,8 @@ public class Rank<E extends Comparable> {
      * @param element 
      */
     public void remove(E element) {
-        elements.remove(element);
+        E old = get(element);
+        elements.remove(old);
     }
 
     /**
@@ -86,7 +90,32 @@ public class Rank<E extends Comparable> {
      * @return 
      */
     public boolean contains(E element) {
-        return elements.contains(element);
+        for (E e : elements) {
+            if (e.equals(element))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    /**
+     * 
+     * @param rank
+     * @return 
+     */
+    public boolean check(Rank<E> rank) {
+        Iterator<E> it1 = iterator();
+        Iterator<E> it2 = rank.iterator();
+        while (true) {
+            E e1 = it1.hasNext() ? it1.next() : null;
+            E e2 = it2.hasNext() ? it2.next() : null;
+            if (e1 == null && e2 == null) {
+                return true;
+            } else if (e1 == null || e2 == null || !e1.equals(e2)) {
+                return false;
+            }
+        }
     }
     
     /**

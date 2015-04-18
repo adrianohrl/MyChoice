@@ -79,8 +79,8 @@ public class OneElementRank<E extends Rateable> extends Rank<Rating<E>> implemen
         if (rated.equals(oneElementRank.rated)) {
             return 0;
         }
-        Double d = globalRate;
-        int value = d.compareTo(oneElementRank.globalRate);
+        Double d = oneElementRank.globalRate;
+        int value = d.compareTo(globalRate);
         if (value == 0) {
             value = rated.compareTo(oneElementRank.rated);
         }
@@ -109,7 +109,7 @@ public class OneElementRank<E extends Rateable> extends Rank<Rating<E>> implemen
      */
     @Override
     public String toString() {
-        String str = rated.toString() + "\nMean Rating: " + globalRate;
+        String str = "\n" + rated.toString() + " (" + globalRate + " / " + getElements().size() + ")";
         int counter = 0;
         for (Rating<E> rating : getElements()) {
             str += "\n(" + ++counter + ")\t" + rating;

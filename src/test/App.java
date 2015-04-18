@@ -59,29 +59,44 @@ public class App {
         
         ManyElementsRank<Location> locationRank = new ManyElementsRank<>();
         for (Respondent respondent : respondents) {
-            locationRank.add(respondent.rate(l, Random.randInt(0, 5), "Meu nome é: " + respondent + ", estou avaliando a localizaćão!!!"));
+            locationRank.add(respondent.rate(l, Random.randInt(1, 5), "Meu nome é: " + respondent + ", estou avaliando a localizaćão!!!"));
         }
         
         ManyElementsRank<Band> bandRank = new ManyElementsRank<>();
         for (Respondent respondent : respondents) {
-            bandRank.add(respondent.rate(dt, Random.randInt(0, 5), ""));
-            bandRank.add(respondent.rate(of, Random.randInt(0, 5), ""));
-            bandRank.add(respondent.rate(dt, Random.randInt(0, 5), ""));
+            bandRank.add(respondent.rate(dt, Random.randInt(1, 5), ""));
+            bandRank.add(respondent.rate(of, Random.randInt(1, 5), ""));
+            bandRank.add(respondent.rate(dt, Random.randInt(1, 5), ""));
+            bandRank.add(respondent.rate(of, Random.randInt(1, 5), ""));
         }
         
-        /*List<Music> musics = new ArrayList<>();
+        List<Music> musics = new ArrayList<>();
         for (Repertory repertory : dt.getRepertories()) {
             musics.addAll(repertory.getMusics());
         }
         for (Repertory repertory : of.getRepertories()) {
             musics.addAll(repertory.getMusics());
         }
+        Music music1 = musics.get(0);
+        Music music2 = musics.get(1);
+        Music music3 = musics.get(2);
+        musics.clear();
+        musics.add(music1);
+        musics.add(music2);
+        musics.add(music3);
         ManyElementsRank<Music> musicRank = new ManyElementsRank<>();
         for (Respondent respondent : respondents) {
+            System.out.println("==========================================");
+            System.out.println(respondent);
             for (Music music : musics) {
-                musicRank.add(respondent.rate(music, Random.randInt(0, 5), ""));
+                System.out.println("---------------------------------------");
+                int rate = Random.randInt(1, 5);
+                System.out.println(music + "(" + rate + ")");
+                musicRank.add(respondent.rate(music, rate, ""));
+                System.out.println("");
+                System.out.println(musicRank);
             }
-        }*/
+        }
         
         System.out.println("============================================");
         System.out.println(locationRank);
@@ -89,8 +104,8 @@ public class App {
         System.out.println("============================================");
         System.out.println(bandRank);
         
-        /*System.out.println("============================================");
-        System.out.println(musicRank);*/
+        System.out.println("============================================");
+        System.out.println(musicRank);
         
     }
     

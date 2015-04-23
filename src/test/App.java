@@ -7,7 +7,6 @@ package test;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.List;
-import javafx.scene.input.KeyCode;
 import utilities.Random;
 import model.*;
 
@@ -43,13 +42,13 @@ public class App {
         e.setAudience(a1);
         
         Band dt = BandInsertion.newInstanceOfDreamTheater();
-        e.getParticipations().add(new Participation(dt, new GregorianCalendar(2015, GregorianCalendar.APRIL, 4, 23, 30), new GregorianCalendar(2015, GregorianCalendar.APRIL, 5, 2, 30), e));
+        e.getParticipations().add(new Participation(dt, dt.getRepertories().get(0), new GregorianCalendar(2015, GregorianCalendar.APRIL, 4, 23, 30), new GregorianCalendar(2015, GregorianCalendar.APRIL, 5, 2, 30), e));
         for (Musician member : dt.getMembers()) {
             users.add(member);
         }
         
         Band of = BandInsertion.newInstanceOfOficinaG3();
-        e.getParticipations().add(new Participation(of, new GregorianCalendar(2015, GregorianCalendar.APRIL, 4, 21, 30), new GregorianCalendar(2015, GregorianCalendar.APRIL, 4, 23, 30), e));
+        e.getParticipations().add(new Participation(of, of.getRepertories().get(0), new GregorianCalendar(2015, GregorianCalendar.APRIL, 4, 21, 30), new GregorianCalendar(2015, GregorianCalendar.APRIL, 4, 23, 30), e));
         for (Musician member : of.getMembers()) {
             users.add(member);
         }
@@ -59,15 +58,15 @@ public class App {
         
         ManyElementsRank<Location> locationRank = new ManyElementsRank<>();
         for (Respondent respondent : respondents) {
-            locationRank.add(respondent.rate(l, Random.randInt(1, 5), "Meu nome é: " + respondent + ", estou avaliando a localizaćão!!!"));
+            locationRank.add(respondent.rate(l, Random.randInt(0, 5), "Meu nome é: " + respondent + ", estou avaliando a localizaćão!!!"));
         }
         
         ManyElementsRank<Band> bandRank = new ManyElementsRank<>();
         for (Respondent respondent : respondents) {
-            bandRank.add(respondent.rate(dt, Random.randInt(1, 5), ""));
-            bandRank.add(respondent.rate(of, Random.randInt(1, 5), ""));
-            bandRank.add(respondent.rate(dt, Random.randInt(1, 5), ""));
-            bandRank.add(respondent.rate(of, Random.randInt(1, 5), ""));
+            bandRank.add(respondent.rate(dt, Random.randInt(0, 5), ""));
+            bandRank.add(respondent.rate(of, Random.randInt(0, 5), ""));
+            bandRank.add(respondent.rate(dt, Random.randInt(0, 5), ""));
+            bandRank.add(respondent.rate(of, Random.randInt(0, 5), ""));
         }
         
         List<Music> musics = new ArrayList<>();
@@ -77,24 +76,11 @@ public class App {
         for (Repertory repertory : of.getRepertories()) {
             musics.addAll(repertory.getMusics());
         }
-        Music music1 = musics.get(0);
-        Music music2 = musics.get(1);
-        Music music3 = musics.get(2);
-        musics.clear();
-        musics.add(music1);
-        musics.add(music2);
-        musics.add(music3);
         ManyElementsRank<Music> musicRank = new ManyElementsRank<>();
         for (Respondent respondent : respondents) {
-            System.out.println("==========================================");
-            System.out.println(respondent);
             for (Music music : musics) {
-                System.out.println("---------------------------------------");
-                int rate = Random.randInt(1, 5);
-                System.out.println(music + "(" + rate + ")");
+                int rate = Random.randInt(0, 5);
                 musicRank.add(respondent.rate(music, rate, ""));
-                System.out.println("");
-                System.out.println(musicRank);
             }
         }
         

@@ -24,8 +24,6 @@ public class Event implements Rateable<Event> {
     private Audience audience;
     /** */
     private List<Participation> participations = new ArrayList<>();
-    /** */
-    private OneElementRank<Event> globalRank = new OneElementRank<>(this);
 
     /**
      * 
@@ -202,26 +200,6 @@ public class Event implements Rateable<Event> {
      */
     public void setParticipations(List<Participation> participations) {
         this.participations = participations;
-    }
-
-    /**
-     * 
-     * @return 
-     */
-    @Override
-    public OneElementRank<Event> getGlobalRank() {
-        return globalRank;
-    }
-
-    /**
-     * 
-     * @param globalRank 
-     */
-    @Override
-    public void setGlobalRank(OneElementRank globalRank) {
-        if (globalRank.getRated() instanceof Event) {
-            this.globalRank = globalRank;
-        }
     }
     
 }

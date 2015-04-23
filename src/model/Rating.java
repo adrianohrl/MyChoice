@@ -186,7 +186,6 @@ public class Rating<T extends Rateable> implements Comparable<Rating> {
             throw new RuntimeException("Rated must not be null!!!");
         }
         this.rated = rated;
-        this.rated.getGlobalRank().add(this);
     }
 
     /**

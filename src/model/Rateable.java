@@ -27,16 +27,4 @@ public interface Rateable<T> extends Comparable<T> {
      */
     public abstract boolean equals(Rateable rateable);
     
-    /**
-     * 
-     * @return 
-     */
-    public abstract OneElementRank getGlobalRank();
-    
-    /**
-     * 
-     * @param globalRank 
-     */
-    public abstract void setGlobalRank(OneElementRank globalRank);
-    
 }

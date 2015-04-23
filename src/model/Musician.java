@@ -23,7 +23,7 @@ public class Musician extends Listener<Musician> implements Rateable<Musician>, 
     /** */
     private List<Repertory> repertories = new ArrayList<>();
     /** */
-    private OneElementRank<Musician> globalRank = new OneElementRank<>(this);
+    private String about = "";
 
     /**
      * 
@@ -150,19 +150,17 @@ public class Musician extends Listener<Musician> implements Rateable<Musician>, 
      * @return 
      */
     @Override
-    public OneElementRank<Musician> getGlobalRank() {
-        return globalRank;
+    public String getAbout() {
+        return about;
     }
 
     /**
      * 
-     * @param globalRank 
+     * @param about 
      */
     @Override
-    public void setGlobalRank(OneElementRank globalRank) {
-        if (globalRank.getRated() instanceof Musician) {
-            this.globalRank = globalRank;
-        }
+    public void setAbout(String about) {
+        this.about = about;
     }
     
 }

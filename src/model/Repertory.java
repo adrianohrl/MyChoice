@@ -20,8 +20,6 @@ public class Repertory implements Rateable<Repertory> {
     private Calendar createdOn = new GregorianCalendar();
     /** */
     private List<Music> musics = new ArrayList<>();
-    /** */
-    private OneElementRank<Repertory> globalRank = new OneElementRank<>(this);
 
     /**
      * 
@@ -118,26 +116,6 @@ public class Repertory implements Rateable<Repertory> {
      */
     public void setMusics(List<Music> musics) {
         this.musics = musics;
-    }
-
-    /**
-     * 
-     * @return 
-     */
-    @Override
-    public OneElementRank<Repertory> getGlobalRank() {
-        return globalRank;
-    }
-
-    /**
-     * 
-     * @param globalRank 
-     */
-    @Override
-    public void setGlobalRank(OneElementRank globalRank) {
-        if (globalRank.getRated() instanceof Repertory) {
-            this.globalRank = globalRank;
-        }
     }
     
 }

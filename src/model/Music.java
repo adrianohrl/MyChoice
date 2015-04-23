@@ -23,8 +23,6 @@ public class Music implements Rateable<Music> {
     private Artist artist;
     /** */
     private Duration duration = Duration.ZERO;
-    /** */
-    private OneElementRank<Music> globalRank = new OneElementRank<>(this);
 
     /**
      *
@@ -242,26 +240,6 @@ public class Music implements Rateable<Music> {
      */
     public void setDuration(Duration duration) {
         this.duration = duration;
-    }
-
-    /**
-     * 
-     * @return 
-     */
-    @Override
-    public OneElementRank<Music> getGlobalRank() {
-        return globalRank;
-    }
-
-    /**
-     * 
-     * @param globalRank 
-     */
-    @Override
-    public void setGlobalRank(OneElementRank globalRank) {
-        if (globalRank.getRated() instanceof Music) {
-            this.globalRank = globalRank;
-        }
     }
 
 }

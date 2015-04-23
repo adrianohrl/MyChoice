@@ -19,8 +19,6 @@ public class Equipment implements Rateable<Equipment> {
     private String model;
     /** */
     private String note;
-    /** */
-    private OneElementRank<Equipment> globalRank = new OneElementRank<>(this);
 
     /**
      * 
@@ -170,26 +168,6 @@ public class Equipment implements Rateable<Equipment> {
      */
     public void setNote(String note) {
         this.note = note;
-    }
-
-    /**
-     * 
-     * @return 
-     */
-    @Override
-    public OneElementRank<Equipment> getGlobalRank() {
-        return globalRank;
-    }
-
-    /**
-     * 
-     * @param globalRank 
-     */
-    @Override
-    public void setGlobalRank(OneElementRank globalRank) {
-        if (globalRank.getRated() instanceof Equipment) {
-            this.globalRank = globalRank;
-        }
     }
     
 }

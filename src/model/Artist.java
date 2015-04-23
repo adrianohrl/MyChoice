@@ -16,6 +16,18 @@ public interface Artist<T extends Rateable> extends Rateable<T> {
      * 
      * @return 
      */
+    public abstract String getAbout();
+    
+    /**
+     * 
+     * @param about 
+     */
+    public abstract void setAbout(String about);
+    
+    /**
+     * 
+     * @return 
+     */
     public abstract boolean isPerforming();
     
     /**

@@ -21,7 +21,7 @@ public class Band extends Group<Musician> implements Rateable<Band>, Artist<Band
     /** */
     private List<Repertory> repertories = new ArrayList<>();
     /** */
-    private OneElementRank<Band> globalRank = new OneElementRank<>(this);
+    private String about = "";
 
     /**
      * 
@@ -146,19 +146,17 @@ public class Band extends Group<Musician> implements Rateable<Band>, Artist<Band
      * @return 
      */
     @Override
-    public OneElementRank<Band> getGlobalRank() {
-        return globalRank;
+    public String getAbout() {
+        return about;
     }
 
     /**
      * 
-     * @param globalRank 
+     * @param about 
      */
     @Override
-    public void setGlobalRank(OneElementRank globalRank) {
-        if (globalRank.getRated() instanceof Band) {
-            this.globalRank = globalRank;
-        }
+    public void setAbout(String about) {
+        this.about = about;
     }
     
 }

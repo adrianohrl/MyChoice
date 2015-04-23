@@ -47,10 +47,6 @@ public class Location implements Rateable<Location> {
      *
      */
     private String country;
-    /**
-     *
-     */
-    private OneElementRank<Location> globalRank = new OneElementRank<>(this);
 
     /**
      *
@@ -325,26 +321,6 @@ public class Location implements Rateable<Location> {
             throw new RuntimeException("Country must not be null!!!");
         }
         this.country = country;
-    }
-
-    /**
-     * 
-     * @return 
-     */
-    @Override
-    public OneElementRank<Location> getGlobalRank() {
-        return globalRank;
-    }
-
-    /**
-     * 
-     * @param globalRank 
-     */
-    @Override
-    public void setGlobalRank(OneElementRank globalRank) {
-        if (globalRank.getRated() instanceof Location) {
-            this.globalRank = globalRank;
-        }
     }
     
 }
